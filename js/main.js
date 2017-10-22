@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  $('#searchUser').on('keyup', function(e) {
+$(document).ready(function () {
+  $('#searchUser').on('keyup', function (e) {
     let username = e.target.value;
 
     // Make request to Github
@@ -9,17 +9,17 @@ $(document).ready(function() {
         client_id: 'd6428f9104277db11f6d',
         client_secret: 'faaed677975dded19261e6f82ab683034308f89e'
       }
-    }).done(function(user) {
+    }).done(function (user) {
       $.ajax({
         url: 'https://api.github.com/users/' + username + '/repos',
         data: {
           client_id: 'd6428f9104277db11f6d',
           client_secret: 'faaed677975dded19261e6f82ab683034308f89e',
-          sort: 'created: asc',
-          per_page: 5
+          sort: 'created: asc', 
+          per_page: 10
         }
-      }).done(function(repos) {
-        $.each(repos, function(index, repo) {
+      }).done(function (repos) {
+        $.each(repos, function (index, repo) {
           $('#repos').append(`
             <div class="well">
               <div class="row">
@@ -39,6 +39,7 @@ $(document).ready(function() {
             `)
         });
       });
+
       $('#profile').html(`
         <div class="panel panel-default">
           <div class="panel-heading">
